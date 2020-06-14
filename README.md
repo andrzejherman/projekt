@@ -2,7 +2,7 @@
 
 Jak używać git-a oraz github-a można nauczyć się tutaj: https://guides.github.com/ W szczególności należy zapoznać się z poradnikami:
 - https://guides.github.com/introduction/git-handbook/
-- https://guides.github.com/activities/forking/
+
 
 ### Informacja o projekcie
 
