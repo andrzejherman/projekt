@@ -13,7 +13,7 @@ Praca nad projektem będzie odbywać się poprzez repozytorium github, które zo
 - PGA: https://classroom.github.com/a/zALs41Nz
 - PLG: https://classroom.github.com/a/2cfYFBz8
 - PWI: https://classroom.github.com/a/IURRwJsq
-- RFE: https://classroom.github.com/a/zALs41Nz 
+- RFE: https://classroom.github.com/a/a-QnTVl3
 
 Co będzie oceniane?
 
