@@ -7,8 +7,9 @@ Ze względu na to, że interesuje nas przede wszystkim tematyka baz danych kolej
 ## Opis systemu
 
 Napisz system ułatwiający prowadzenie firmy organizującej wycieczki rowerowe. Firma obsługuje wiele punktów, w których zaczynają się i kończą etapy poszczególnych wycieczek.
-Na czas wycieczki klient może wypożyczyć rower. Pomiędzy punktami klienci podróżują na własną rękę.
-Trasa wycieczki to lista punktów pomiędzy jej etapami. Każda wycieczka rozpoczyna się pierwszego dnia rano w pierwszym punkcie trasy. Następnie klient ma cały dzień na dojechanie do kolejnego punktu trasy, w pobliżu którego spędza noc.
+Pomiędzy punktami klienci podróżują na własną rękę. 
+Trasa wycieczki to lista punktów pomiędzy jej etapami. Każda wycieczka rozpoczyna się pierwszego dnia rano w pierwszym punkcie trasy. 
+Następnie klient ma cały dzień na dojechanie do kolejnego punktu trasy, w pobliżu którego spędza noc.
 Rano następnego dnia rozpoczyna w tym samym punkcie kolejny etap i tak aż dojedzie do ostatniego punktu trasy.
 Uwaga - trasa nie obejmuje punktów przez które klient być może przejeżdża w trakcie etapu ale tam nie nocuje.
 Trasa może być standardowa lub wybrana przez klienta. 
@@ -220,10 +221,10 @@ Dodaje nową standardową wycieczkę o (unikalnym) numerze `<version>`, `<nodes>
 ###### std_trip
 
 ```
-std_trip <trip> <biker> <date> <version> <bike> <accomodation>
+std_trip <trip> <biker> <date> <version> 
 ```
 
-Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, `<bike>`, `<accomodation>` to wartości 0 lub 1 oznaczające, że klient chce (odpowiednio): wypożyczyć rower na całą wycieczkę oraz zamówić noclegi w punktach pomiędzy etapami.
+Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, 
 
 `<biker>` może być nowym klientem lub jednym z dotychczasowych klientów.
 
@@ -235,12 +236,11 @@ Atrybuty zwracanej krotek
 ###### trip
 
 ```
-trip <trip> <biker> <nodes> <bike> <accomodation>
+trip <trip> <biker> <nodes>
 ```
 
 Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`,  `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, 
 `<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`.
-Wartości `<bike>`, `<accomodation>` to wartości 0 lub 1 oznaczające, że klient chce (odpowiednio): wypożyczyć rower na całą wycieczkę oraz zamówić noclegi w punktach pomiędzy etapami.
 
 `<biker>` może być nowym klientem lub jednym z dotychczasowych klientów.
 
