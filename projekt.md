@@ -160,7 +160,9 @@ Pierwsze uruchomienie (z parametrem `--init`):
 ```
 opis działania funkcji
 
+```
 // lista atrybutów wynikowych tabeli data lub informacja o braku tego pola
+```
 
 ## Wywołania API
 
@@ -187,9 +189,11 @@ open <database> <login> <password>
 
 Przekazuje dane umożliwiające podłączenie Twojego programu do bazy - nazwę bazy, login oraz hasło, wywoływane dokładnie jeden raz, w pierwszej linii wejścia
 
+```
 // nie zwraca krotek
+```
 
-## Operacje 
+## Funkcje API
 
 ###### node
 
