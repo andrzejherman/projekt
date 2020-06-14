@@ -91,16 +91,15 @@ Wejście zawiera w pierwszym wierszu wywołanie funkcji `open` z następującymi
 - kolejne uruchomienia
 
 Wejście zawiera w pierwszym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`.
-Następnie wywołane są funkcje API dodające co najmniej 3 punkty (`node`) oraz 1 wycieczkę (`add_trip`). W dalszej kolejności znajdują się wywołania dowolnych funkcji API za wyjątkiem funkcji `open`.
+W dalszej kolejności znajdują się wywołania dowolnych funkcji API za wyjątkiem funkcji `open`.
 
 ## Dodatkowe informacje i założenia 
 - Można założyć, że przed uruchomieniem z parametrem `--init` baza nie zawiera jakichkolwiek tabel.
-- Baza danych oraz użytkownik `app` będą istnieli w momencie pierwszego uruchomienia bazy, dostępne będzie również rozszerzenie PostGIS (zainstalowany pakiet `postgis` oraz wydane polecenie `create extension postgis`.
+- Baza danych oraz użytkownik `app` będą istnieli w momencie pierwszego uruchomienia bazy, dostępne będzie również rozszerzenie PostGIS (zainstalowany pakiet `postgis` oraz wydane polecenie `create extension postgis`).
 - Przy pierwszym uruchomieniu program powinien utworzyć wszystkie niezbędne elementy bazy danych (tabele, więzy, funkcje, wyzwalacze) zgodnie z przygotowanym przez studenta modelem fizycznym.
 - Baza nie będzie modyfikowana pomiędzy kolejnymi uruchomieniami.
 - Program nie będzie miał praw do tworzenia i zapisywania jakichkolwiek plików. 
 - Program będzie mógł czytać pliki z bieżącego katalogu (np. dołączony do rozwiązania studenta plik .sql zawierający polecenia tworzące niezbędne elementy bazy).
- 
 
 ## Format wejścia
 
@@ -165,16 +164,14 @@ opis działania funkcji
 
 ## Wywołania API
 
-Identyfikatory `<biker>`, `<node>`, `<version>` są typu number i jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. **Weryfikację poprawności zapytań przeprowadza inna warstwa systemu i nie musimy się tą weryfikacją przejmować.**. 
+Identyfikatory `<biker>`, `<node>`, `<version>` są typu number i jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. **Weryfikację poprawności zapytań przeprowadza inna warstwa systemu i nie musimy się tą weryfikacją przejmować.** 
+**Można założyć, że wszystkie wywołania będą zawsze w prawidłowym formacie, a wszystkie wartości będą odpowiedniego typu.
+
 
 Wartość `<password>` jest typu `string`, jej długość nie przekracza 128 znaków.
 
 Wartość `<date>` jest typu `date` i reprezentuje datę. 
-<!--**Gwarantowane jest, że wszystkie wywołania będą podane na wejściu w kolejności rosnących timestampów.**-->
 
-Argumenty funkcji w nawiasach `[ ]` są opcjonalne (tzn. nie muszą być podane w wywołaniu funkcji).
-
-**Można założyć, że wszystkie wywołania będą zawsze w prawidłowym formacie, a wszystkie wartości będą odpowiedniego typu.**
 
 ###### Status "ERROR"
 
@@ -248,7 +245,6 @@ Atrybuty zwracanej krotek
 // nie zwraca krotek
 ```
 
-
 ###### closest_nodes
 
 ```
@@ -256,6 +252,7 @@ closest_nodes <ilat> <ilon>
 ```
 
 Znajdź i zwróć dane 3 punktów położonych najbliżej współrzędnych `<ilat> <ilon>` - dla każdego z tych 3 punktów zwróć identyfikator `<node>`, jego współprzędne `<olat>`, `<olon>` oraz odległość `<distance>`.
+W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystkie te punkty.
 
 ```
 // <node> <olat> <olon> <distance>
@@ -267,7 +264,7 @@ Znajdź i zwróć dane 3 punktów położonych najbliżej współrzędnych `<ila
 party <ibiker> <date>
 ```
 
-Znajdź i zwróć listę rowerzystów nocujących w promieniu **20 km** od miejsca nocowania klienta `<ibiker>` w dniu `<date>`. 
+Znajdź i zwróć listę rowerzystów nocujących w promieniu **20 km** od miejsca nocowania klienta `<ibiker>` w dniu `<date>`. Jeśli `<ibiker>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
 Dla każdego rowerzysty podaj jego id `<obiker>`, id `<node>` punktu, w którym nocuje oraz odległość `<distance>` pomiędzy tym punktem, a miejscem nocowania rowerzysty `<ibiker>`. 
 
 ```
@@ -279,7 +276,7 @@ Dla każdego rowerzysty podaj jego id `<obiker>`, id `<node>` punktu, w którym 
 guests <node> <date>
 ```
 
-Dla punktu `<node>` zwróć listę rowerzystów `<biker>`, którzy bedą w nim nocować w dniu `<date>`.
+Dla punktu `<node>` zwróć listę rowerzystów `<biker>`, którzy bedą w nim nocować w dniu `<date>`. Załóż, że `<node>` jest w bazie.
 
 
 ```
@@ -294,7 +291,6 @@ biker <biker>
 
 Zwróć dane na temat rowerzysty `<biker>` - ile do tej pory zarezerwował wycieczek `<no_trips>`, ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
 (zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). Wyniki posortuj malejąco wg `<distance>`.
-
 
 ```
 // <biker> <no_trips> <distance>
