@@ -26,7 +26,7 @@ Pakiety `postgresql-10` oraz `postgis`. W celu instalacji PostGIS z domyslnego p
 
 Aby uzyskać pełną liczbę punktów za zadanie użyj rozszerzenia PostGIS, a długość i szerokość geograficzną przechowuj z użyciem typu `geography`.
 Alternatywnie możesz użyć innych sposobów np. założyć, że Ziemia jest idealną kulą lub, że jest płaska. 
-Użyj odpowiedniego indeksu.
+Użyj odpowiedniego indeksu. Dokumentacja PostGIS 2.4: https://postgis.net/docs/manual-2.4/using_postgis_dbmanagement.html#PostGIS_Geography
 
 Przykład obliczania odległości z użyciem funkcji `ST_Distance`, nie zakłada, że Ziemia jest idealną kulą.
 
@@ -153,6 +153,8 @@ Pierwsze uruchomienie (z parametrem `--init`):
 {"status": "OK"}
 {"status": "OK"}
 ```
+
+(przykład zostanie rozbudowany o przykłady użycia pozostałych funkcji)
 
 ## Format opisu API
 
