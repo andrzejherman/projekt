@@ -238,7 +238,7 @@ Atrybuty zwracanej krotek
 ###### trip
 
 ```
-trip <trip> <biker> <nodes>
+trip <trip> <biker> <date> <nodes>
 ```
 
 Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`,  `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, 
