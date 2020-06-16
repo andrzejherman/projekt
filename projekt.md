@@ -70,11 +70,11 @@ Uwaga:
 Punktacja:
 - Przygotowanie modelu konceptualnego: **do 20 pkt.** 
 - Implementacja funkcji `open`, `node`, `catalog`, `std_trip`: **10 pkt.** (muszą być zaimplementowane).
-- Implementacja funkcji `closest_nodes`, `party`, `guests`, `biker` : **do 40 pkt. (po 10 pkt)**
+- Implementacja funkcji `closest_nodes`, `party`, `guests`, `cyclist` : **do 40 pkt. (po 10 pkt)**
 
 Punkty można dostać wyłącznie za funkcje, które można przetestować (tzn. aby otrzymać punkty za funkcję `closest_points` funkcja `node` też musi być zaimplementowana).
 
-- Przechowywanie danych geograficznych za pomocą typu `geography` rozszerzenia PostGIS, poprawne ich wykorzystanie do implementacji funkcji `closest_nodes`, `party`, `biker`, 
+- Przechowywanie danych geograficznych za pomocą typu `geography` rozszerzenia PostGIS, poprawne ich wykorzystanie do implementacji funkcji `closest_nodes`, `party`, `cyclist`, 
 obliczanie odległości z poziomu BD - bez zakładania płaskości lub idealnej kulistości Ziemi, odpowiednie indeksowanie wyszukiwań: **30 pkt.** (punkty będą przyznane wyłącznie za spełnienie wszystkich wymienionych wymagań!).
 
   W przeciwnym przypadku - tj. spełnienie jedynie niektórych wymienionych powyżej wymagań, wykorzystanie innych (poprawnych) sposobów, np. modułu `earthdistance`, obliczanie odległości na poziomie aplikacji (czyli bez indeksowania), _haversine formula_ itp.: **do 10 pkt.**
@@ -87,7 +87,7 @@ Wszystkie dane powinny być przechowywane w bazie danych, efekt działania każd
 
 - pierwsze uruchomienie - program wywołany z parametrem `--init`
 
-Wejście zawiera w pierwszym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`.
+Wejście zawiera w pierwszym i jedynym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`.
 
 - kolejne uruchomienia
 
@@ -110,7 +110,7 @@ Przykład:
 
 Obiekt
 ```
-{ "node": { "node": 12345, "lat": "51.111044", lon: "17.053423", "description": "a nice place to relax, strongly recommended"}} 
+{ "function": "open", "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"} 
 ```
 oznacza wywołanie funkcji o nazwie `node` z argumentem `node` przyjmującym wartość `12345`, argumentami `lat` i `lon` przyjmującymi wartości odpowiednio 51.111044 oraz 17.053423 oraz `description` – wartość `a nice place to relax, strongly recommended`.
 
@@ -132,7 +132,7 @@ Dopuszczalna jest dodatkowa para o kluczu `debug` i wartości typu `string` z ew
 
 Pierwsze uruchomienie (z parametrem `--init`):
 ```
-{ "open": { "database": "student", "login": "app", "password": "qwerty"}}
+{ "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
 ```
 
 ###### Oczekiwane wyjście
@@ -142,9 +142,9 @@ Pierwsze uruchomienie (z parametrem `--init`):
 
 ###### Kolejne uruchomienie:
 ```
-{ "open": { "database": "student", "login": "app", "password": "qwerty"}}
-{ "node": { "node": 12345, "lat": "51.111044", lon: "17.053423", "description": "a nice place to relax, strongly recommended"}}
-{ "node": { "node": 12346, "lat": "51.198127", lon: "16.919484", "description": "another nice place, is a must-see"}}
+{ "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
+{ "function": "node", "body": { "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"}}
+{ "function": "node", "body": { "node": 12346, "lat": 51.198127, "lon": 16.919484, "description": "another nice place, is a must-see"}}
 ```
 
 ###### Oczekiwane wyjście (dla czytelności zawiera znaki nowej linii)
@@ -169,8 +169,8 @@ opis działania funkcji
 
 ## Wywołania API
 
-Identyfikatory `<biker>`, `<node>`, `<version>` są typu number i jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. **Weryfikację poprawności zapytań przeprowadza inna warstwa systemu i nie musimy się tą weryfikacją przejmować.** 
-**Można założyć, że wszystkie wywołania będą zawsze w prawidłowym formacie, a wszystkie wartości będą odpowiedniego typu.
+Identyfikatory `<cyclist>`, `<node>`, `<version>` są typu number i jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. 
+**Weryfikację poprawności zapytań przeprowadza inna warstwa systemu i nie musimy się tą weryfikacją przejmować. Można założyć, że wszystkie wywołania będą zawsze w prawidłowym formacie, a wszystkie wartości będą odpowiedniego typu.**
 
 
 Wartość `<password>` jest typu `string`, jej długość nie przekracza 128 znaków.
@@ -220,37 +220,38 @@ Dodaje nową standardową wycieczkę o (unikalnym) numerze `<version>`, `<nodes>
 // nie zwraca krotek
 ```
 
-###### std_trip
-
-```
-std_trip <trip> <biker> <date> <version> 
-```
-
-Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, 
-
-`<biker>` może być nowym klientem lub jednym z dotychczasowych klientów.
-
-Atrybuty zwracanej krotek
-```
-// nie zwraca krotek
-```
-
 ###### trip
 
 ```
-trip <trip> <biker> <date> <nodes>
+trip <trip> <cyclist> <date> <version> 
 ```
 
-Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<biker>`,  `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, 
-`<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`.
+Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<cyclist>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, 
 
-`<biker>` może być nowym klientem lub jednym z dotychczasowych klientów.
+`<cyclist>` może być nowym klientem lub jednym z dotychczasowych klientów.
 
 Atrybuty zwracanej krotek
 ```
 // nie zwraca krotek
 ```
 
+<!--
+###### trip
+
+```
+trip <trip> <cyclist> <date> <nodes>
+```
+
+Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<cyclist>`,  `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, 
+`<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`.
+
+`<cyclist>` może być nowym klientem lub jednym z dotychczasowych klientów.
+
+Atrybuty zwracanej krotek
+```
+// nie zwraca krotek
+```
+-->
 ###### closest_nodes
 
 ```
@@ -267,14 +268,14 @@ W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystki
 ###### party
 
 ```
-party <ibiker> <date>
+party <icyclist> <date>
 ```
 
-Znajdź i zwróć listę rowerzystów nocujących w promieniu **20 km** od miejsca nocowania klienta `<ibiker>` w dniu `<date>`. Jeśli `<ibiker>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
-Dla każdego rowerzysty podaj jego id `<obiker>`, id `<node>` punktu, w którym nocuje oraz odległość `<distance>` pomiędzy tym punktem, a miejscem nocowania rowerzysty `<ibiker>`. 
+Znajdź i zwróć listę rowerzystów nocujących w promieniu **20 km** od miejsca nocowania klienta `<icyclist>` w dniu `<date>`. Jeśli `<icyclist>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
+Dla każdego rowerzysty podaj jego id `<ocyclist>`, id `<node>` punktu, w którym nocuje oraz odległość `<distance>` pomiędzy tym punktem, a miejscem nocowania rowerzysty `<icyclist>`. 
 
 ```
-// <obiker> <node> <distance>
+// <ocyclist> <node> <distance>
 ```
 ###### guests
 
@@ -282,22 +283,24 @@ Dla każdego rowerzysty podaj jego id `<obiker>`, id `<node>` punktu, w którym 
 guests <node> <date>
 ```
 
-Dla punktu `<node>` zwróć listę rowerzystów `<biker>`, którzy bedą w nim nocować w dniu `<date>`. Załóż, że `<node>` jest w bazie.
+Dla punktu `<node>` zwróć listę rowerzystów `<cyclist>`, którzy bedą w nim nocować w dniu `<date>`. Załóż, że `<node>` jest w bazie.
 
 
 ```
-// <biker>
+// <cyclist>
 
 ```
 
-##### biker
+##### cyclist
 ```
-biker <biker>
+cyclist <limit>
 ```
 
-Zwróć dane na temat rowerzysty `<biker>` - ile do tej pory zarezerwował wycieczek `<no_trips>`, ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
-(zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). Wyniki posortuj malejąco wg `<distance>`.
+Zwróć ranking rowerzystów - wynik ogranicz do pierwszych `<limit>` krotek.
+Dla każdego rowerzysty `<cyclist>` zwróć ile do tej pory zarezerwowa wycieczek `<no_trips>` oraz ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
+(zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). 
+Wyniki posortuj malejąco wg `<distance>`.
 
 ```
-// <biker> <no_trips> <distance>
+// <cyclist> <no_trips> <distance>
 ```
