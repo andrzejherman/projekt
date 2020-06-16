@@ -69,7 +69,7 @@ Uwaga:
 
 Punktacja:
 - Przygotowanie modelu konceptualnego: **do 20 pkt.** 
-- Implementacja funkcji `open`, `node`, `catalog`, `std_trip`: **10 pkt.** (muszą być zaimplementowane).
+- Implementacja funkcji `open`, `node`, `catalog`, `trip`: **10 pkt.** (muszą być zaimplementowane).
 - Implementacja funkcji `closest_nodes`, `party`, `guests`, `cyclist` : **do 40 pkt. (po 10 pkt)**
 
 Punkty można dostać wyłącznie za funkcje, które można przetestować (tzn. aby otrzymać punkty za funkcję `closest_points` funkcja `node` też musi być zaimplementowana).
@@ -83,16 +83,20 @@ obliczanie odległości z poziomu BD - bez zakładania płaskości lub idealnej 
 
 Twój program po uruchomieniu powinien przeczytać ze standardowego wejścia ciąg wywołań funkcji API, a wyniki ich działania wypisać na standardowe wyjście.
 
-Wszystkie dane powinny być przechowywane w bazie danych, efekt działania każdej funkcji modyfikującej bazę, dla której wypisano potwierdzenie wykonania (wartość OK) powinien być utrwalony. Program będzie uruchamiany wielokrotnie z następującymi parametrami:
+Wszystkie dane powinny być przechowywane w bazie danych, efekt działania każdej funkcji modyfikującej bazę, dla której wypisano potwierdzenie wykonania (wartość OK) powinien być utrwalony. 
+**Dane dostępowe do bazy danych**: baza danych: `student`, login: `app`, password: `qwerty`.
+
+Program będzie uruchamiany wielokrotnie z następującymi parametrami:
 
 - pierwsze uruchomienie - program wywołany z parametrem `--init`
 
-Wejście zawiera w pierwszym i jedynym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`.
+Wejście puste. 
+
+<!-- zawiera w pierwszym i jedynym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`. -->
 
 - kolejne uruchomienia
 
-Wejście zawiera w pierwszym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`.
-W dalszej kolejności znajdują się wywołania dowolnych funkcji API za wyjątkiem funkcji `open`.
+Wejście zawiera wywołania kolejnych funkcji API.
 
 ## Dodatkowe informacje i założenia 
 - Można założyć, że przed uruchomieniem z parametrem `--init` baza nie zawiera jakichkolwiek tabel.
@@ -145,6 +149,11 @@ Pierwsze uruchomienie (z parametrem `--init`):
 { "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
 { "function": "node", "body": { "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"}}
 { "function": "node", "body": { "node": 12346, "lat": 51.198127, "lon": 16.919484, "description": "another nice place, is a must-see"}}
+{ "function": "catalog", "body": { "version": 1, "nodes": [12345, 12345, 12346, 12345]}}
+{ "function": "catalog", "body": { "version": 2, "nodes": [12345, 12346]}}
+
+
+
 ```
 
 ###### Oczekiwane wyjście (dla czytelności zawiera znaki nowej linii)
@@ -214,7 +223,8 @@ Dodaj nowy punkt z identyfikatorem `<node>`, ulokowany w  miejscu o współrzęd
 catalog <version> <nodes>
 ```
 
-Dodaje nową standardową wycieczkę o (unikalnym) numerze `<version>`, `<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`.
+Dodaje nową standardową wycieczkę o (unikalnym) numerze `<version>`, `<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). 
+Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`. Każda wycieczka składa się z co najmniej 2 punktów (niekoniecznie różnych).
 
 ```
 // nie zwraca krotek
