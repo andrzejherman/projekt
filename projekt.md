@@ -130,10 +130,7 @@ Dopuszczalne jest dodatkowe pole o kluczu `debug` i wartości typu `string` z ew
 
 ## Przykładowe wejście i wyjście
 
-Pierwsze uruchomienie (z parametrem `--init`):
-```
-
-```
+Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
 
 ###### Oczekiwane wyjście
 ```
@@ -162,7 +159,6 @@ Pierwsze uruchomienie (z parametrem `--init`):
 
 ###### Oczekiwane wyjście (dla czytelności zawiera znaki nowej linii)
 ```
-{"status": "OK"}
 {"status": "OK", "data": []}
 {"status": "OK"}
 {"status": "OK"}
@@ -292,7 +288,7 @@ closest_nodes <ilat> <ilon>
 ```
 
 Znajdź i zwróć dane 3 punktów położonych najbliżej współrzędnych `<ilat> <ilon>` - dla każdego z tych 3 punktów zwróć identyfikator `<node>`, jego współprzędne `<olat>`, `<olon>` oraz odległość `<distance>`.
-W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystkie te punkty. Wynik posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<node>`.
+W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystkie te punkty. Wynik posortuj rosnąco wg `<distance>`, w drugiej kolejności rosnąco wg `<node>`.
 
 ```
 // <node> <olat> <olon> <distance>
@@ -306,7 +302,7 @@ party <icyclist> <date>
 
 Znajdź i zwróć listę rowerzystów (różnych od `<icyclist>`) nocujących w promieniu **20 km** od miejsca nocowania klienta `<icyclist>` w dniu `<date>`. Jeśli `<icyclist>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
 Dla każdego rowerzysty podaj jego id `<ocyclist>`, id `<node>` punktu, w którym nocuje oraz odległość `<distance>` pomiędzy tym punktem, a miejscem nocowania rowerzysty `<icyclist>`. 
-Wyniki posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<ocyclist>`.
+Wyniki posortuj rosnąco wg `<distance>`, w drugiej kolejności rosnąco wg `<ocyclist>`.
 
 ```
 // <ocyclist> <node> <distance>
@@ -333,7 +329,7 @@ cyclists <limit>
 Zwróć ranking rowerzystów - wynik ogranicz do pierwszych `<limit>` krotek.
 Dla każdego rowerzysty `<cyclist>` zwróć ile do tej pory zarezerwowa wycieczek `<no_trips>` oraz ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
 (zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). 
-Wyniki posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<cyclist>`.
+Wyniki posortuj rosnąco wg `<distance>`, w drugiej kolejności rosnąco wg `<cyclist>`.
 
 ```
 // <cyclist> <no_trips> <distance>
