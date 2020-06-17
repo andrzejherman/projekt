@@ -12,7 +12,7 @@ Trasa wycieczki to lista punktów pomiędzy jej etapami. Każda wycieczka rozpoc
 Następnie klient ma cały dzień na dojechanie do kolejnego punktu trasy, w pobliżu którego spędza noc.
 Rano następnego dnia rozpoczyna w tym samym punkcie kolejny etap i tak aż dojedzie do ostatniego punktu trasy.
 Uwaga - trasa nie obejmuje punktów przez które klient być może przejeżdża w trakcie etapu ale tam nie nocuje.
-Wszystkie trasy są skatalogowane. Klienci ma zawsze cały dzień na przejechanie jednego etapu więc rezerwując wycieczkę podaje się datę jej rozpoczęcia oraz wersję trasy z katalogu.
+Wszystkie trasy są skatalogowane. Klienci mają zawsze cały dzień na przejechanie jednego etapu więc rezerwując wycieczkę podaje się datę jej rozpoczęcia oraz wersję trasy z katalogu.
 
 
 ## Technologie
@@ -292,7 +292,7 @@ cyclists <limit>
 ```
 
 Zwróć ranking rowerzystów - wynik ogranicz do pierwszych `<limit>` krotek.
-Dla każdego rowerzysty `<cyclist>` zwróć ile do tej pory zarezerwowa wycieczek `<no_trips>` oraz ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
+Dla każdego rowerzysty `<cyclist>` zwróć ile do tej pory zarezerwował wycieczek `<no_trips>` oraz ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
 (zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). 
 Wyniki posortuj rosnąco wg `<distance>`, w drugiej kolejności rosnąco wg `<cyclist>`.
 
