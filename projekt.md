@@ -112,11 +112,9 @@ Przykład:
 
 Obiekt
 ```
-{ "function": "open", "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"} 
+{ "function": "node", "body": { "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"}}
 ```
 oznacza wywołanie funkcji o nazwie `node` z argumentem `node` przyjmującym wartość `12345`, argumentami `lat` i `lon` przyjmującymi wartości odpowiednio 51.111044 oraz 17.053423 oraz `description` – wartość `a nice place to relax, strongly recommended`.
-
-W pierwszej linii wejścia znajduje się wywołanie funkcji `open` z argumentami umożliwiającymi nawiązanie połączenia z bazą danych.
 
 
 ## Format wyjścia
@@ -134,7 +132,7 @@ Dopuszczalne jest dodatkowe pole o kluczu `debug` i wartości typu `string` z ew
 
 Pierwsze uruchomienie (z parametrem `--init`):
 ```
-{ "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
+
 ```
 
 ###### Oczekiwane wyjście
@@ -144,7 +142,6 @@ Pierwsze uruchomienie (z parametrem `--init`):
 
 ###### Kolejne uruchomienie:
 ```
-{ "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
 { "function": "closest_nodes", "body": { "ilat": 51.107883, "ilon": 17.038538}}
 { "function": "node", "body": { "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"}}
 { "function": "node", "body": { "node": 12346, "lat": 51.198127, "lon": 16.919484, "description": "another nice place, is a must-see"}}
