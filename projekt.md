@@ -206,20 +206,6 @@ Wartość `<date>` jest typu `date` i reprezentuje datę.
 
 Aplikacja będzie testowana wyłącznie na danych spełniających niniejszą specyfikację, jednak w razie wykrycia ew. niezgodności można zwrócić status "ERROR" (nie piszemy wariantów fail-safe itp.).
 
-## Nawiązywanie połączenia
-
-###### open
-
-```
-open <database> <login> <password>
-```
-
-Przekazuje dane umożliwiające podłączenie Twojego programu do bazy - nazwę bazy, login oraz hasło, wywoływane dokładnie jeden raz, w pierwszej linii wejścia
-
-```
-// nie zwraca krotek
-```
-
 ## Funkcje API
 
 ###### node
