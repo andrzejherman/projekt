@@ -1,7 +1,7 @@
 # Projekt: Wycieczki.
 
 Twoim zadaniem jest zaimplementowanie zdefiniowanego poniżej API.
-frfr
+
 Ze względu na to, że interesuje nas przede wszystkim tematyka baz danych kolejne wywołania funkcji API należy wczytywać ze standardowego wejścia, a wyniki zapisywać na standardowe wyjście.
 
 ## Opis systemu
@@ -19,7 +19,7 @@ Wszystkie trasy są skatalogowane. Klienci ma zawsze cały dzień na przejechani
 
 System Linux. Język programowania - python. Baza danych – PostgreSQL. Testy przeprowadzałem na komputerze z Ubuntu 18.04.4 LTS, PostgreSQL 10, PostGIS 2.4 (domyślne wersje w Ubuntu 18.04.4).
 Pakiety `postgresql-10` oraz `postgis`. W celu instalacji PostGIS z domyslnego pakietu musiałem zrobić upgrade starego PostgreSQL do wersji 10: https://stackoverflow.com/questions/47029055/how-do-i-upgrade-my-postgresql-9-5-to-postgresql-10-on-ubuntu-16-04
-(dokładne wersje PostgreSQL i PostGIS nie mają znaczenia, muszą jednak do siebie _pasować_, w szfrczególności być zainstalowane w odpowiednich katalogach).
+(dokładne wersje PostgreSQL i PostGIS nie mają znaczenia, muszą jednak do siebie _pasować_, w szczególności być zainstalowane w odpowiednich katalogach).
 
 ##  Przechowywanie danych geograficznych
 
