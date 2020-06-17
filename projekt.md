@@ -151,10 +151,6 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
 { "function": "party", "body": { "icyclist": "piotrek", "date": "2020-06-17"}}
 { "function": "guests", "body": { "node": 12345, "date": "2020-06-16"}}
 { "function": "cyclists", "body": { "limit": 2}}
-
-
-
-
 ```
 
 ###### Oczekiwane wyjście (dla czytelności zawiera znaki nowej linii)
@@ -182,7 +178,7 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
   {"cyclist": "paweł", "no_trips": 1, "distance": 34970,
   {"cyclist": "piotrek", "no_trips": 1, "distance": 34970}
 ]}
-
+```
 
 ## Format opisu API
 
