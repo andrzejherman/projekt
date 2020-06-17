@@ -197,7 +197,7 @@ opis działania funkcji
 
 ## Wywołania API
 
-Identyfikatory `<cyclist>`, `<node>`, `<version>` są typu number i jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. 
+Identyfikatory `<cyclist>` typu string oraz identyfikatory `<node>`, `<version>` typu number  jednoznacznie identyfikują (kolejno): klientów, punkty na trasie rozdzielające etapy wycieczek oraz wycieczki standardowe. 
 **Weryfikację poprawności zapytań przeprowadza inna warstwa systemu i nie musimy się tą weryfikacją przejmować. Można założyć, że wszystkie wywołania będą zawsze w prawidłowym formacie, a wszystkie wartości będą odpowiedniego typu.**
 
 
