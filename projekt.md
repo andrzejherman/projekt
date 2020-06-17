@@ -12,8 +12,7 @@ Trasa wycieczki to lista punktów pomiędzy jej etapami. Każda wycieczka rozpoc
 Następnie klient ma cały dzień na dojechanie do kolejnego punktu trasy, w pobliżu którego spędza noc.
 Rano następnego dnia rozpoczyna w tym samym punkcie kolejny etap i tak aż dojedzie do ostatniego punktu trasy.
 Uwaga - trasa nie obejmuje punktów przez które klient być może przejeżdża w trakcie etapu ale tam nie nocuje.
-Trasa może być standardowa lub wybrana przez klienta. 
-Klienci ma zawsze cały dzień na przejechanie jednego etapu więc rezerwując wycieczkę podaje się datę jej rozpoczęcia oraz trasę w postaci numeru trasy standardowej lub listy punktów.
+Wszystkie trasy są skatalogowane. Klienci ma zawsze cały dzień na przejechanie jednego etapu więc rezerwując wycieczkę podaje się datę jej rozpoczęcia oraz wersję trasy z katalogu.
 
 
 ## Technologie
@@ -70,11 +69,11 @@ Uwaga:
 Punktacja:
 - Przygotowanie modelu konceptualnego: **do 20 pkt.** 
 - Implementacja funkcji `open`, `node`, `catalog`, `trip`: **10 pkt.** (muszą być zaimplementowane).
-- Implementacja funkcji `closest_nodes`, `party`, `guests`, `cyclist` : **do 40 pkt. (po 10 pkt)**
+- Implementacja funkcji `closest_nodes`, `party`, `guests`, `cyclists` : **do 40 pkt. (po 10 pkt)**
 
 Punkty można dostać wyłącznie za funkcje, które można przetestować (tzn. aby otrzymać punkty za funkcję `closest_points` funkcja `node` też musi być zaimplementowana).
 
-- Przechowywanie danych geograficznych za pomocą typu `geography` rozszerzenia PostGIS, poprawne ich wykorzystanie do implementacji funkcji `closest_nodes`, `party`, `cyclist`, 
+- Przechowywanie danych geograficznych za pomocą typu `geography` rozszerzenia PostGIS, poprawne ich wykorzystanie do implementacji funkcji `closest_nodes`, `party`, `cyclists`, 
 obliczanie odległości z poziomu BD - bez zakładania płaskości lub idealnej kulistości Ziemi, odpowiednie indeksowanie wyszukiwań: **30 pkt.** (punkty będą przyznane wyłącznie za spełnienie wszystkich wymienionych wymagań!).
 
   W przeciwnym przypadku - tj. spełnienie jedynie niektórych wymienionych powyżej wymagań, wykorzystanie innych (poprawnych) sposobów, np. modułu `earthdistance`, obliczanie odległości na poziomie aplikacji (czyli bez indeksowania), _haversine formula_ itp.: **do 10 pkt.**
@@ -92,19 +91,18 @@ Program będzie uruchamiany wielokrotnie z następującymi parametrami:
 
 Wejście puste. 
 
-<!-- zawiera w pierwszym i jedynym wierszu wywołanie funkcji `open` z następującymi danymi login: `app`, password: `qwerty`. -->
-
 - kolejne uruchomienia
 
 Wejście zawiera wywołania kolejnych funkcji API.
 
 ## Dodatkowe informacje i założenia 
 - Można założyć, że przed uruchomieniem z parametrem `--init` baza nie zawiera jakichkolwiek tabel.
-- Baza danych oraz użytkownik `app` będą istnieli w momencie pierwszego uruchomienia bazy, dostępne będzie również rozszerzenie PostGIS (zainstalowany pakiet `postgis` oraz wydane polecenie `create extension postgis`).
+- Baza danych `student` oraz użytkownik `app` z hasłem `qwerty` będą istnieli w momencie pierwszego uruchomienia bazy, dostępne będzie również rozszerzenie PostGIS (zainstalowany pakiet `postgis` oraz wydane polecenie `create extension postgis`).
 - Przy pierwszym uruchomieniu program powinien utworzyć wszystkie niezbędne elementy bazy danych (tabele, więzy, funkcje, wyzwalacze) zgodnie z przygotowanym przez studenta modelem fizycznym.
 - Baza nie będzie modyfikowana pomiędzy kolejnymi uruchomieniami.
 - Program nie będzie miał praw do tworzenia i zapisywania jakichkolwiek plików. 
 - Program będzie mógł czytać pliki z bieżącego katalogu (np. dołączony do rozwiązania studenta plik .sql zawierający polecenia tworzące niezbędne elementy bazy).
+- Wszystkie odległości wypisz po zaookrągleniu do pełnego metra.
 
 ## Format wejścia
 
@@ -126,10 +124,10 @@ W pierwszej linii wejścia znajduje się wywołanie funkcji `open` z argumentami
 Dla każdego wywołania wypisz w osobnej linii obiekt JSON zawierający obiekt z polami: status (zwracane zawsze), data (tylko dla funkcji zwracających krotki), debug (opcjonalnie). 
 
 Wartość pola status to "OK" albo "ERROR".
- 
-Tabela `data` zawiera wszystkie krotki wynikowe. Każda krotka to tabela zawierająca wartości wszystkich jej atrybutów w kolejności podanej w specyfikacji.
 
-Dopuszczalna jest dodatkowa para o kluczu `debug` i wartości typu `string` z ew. informacją przydatną w debugowaniu (jest ona całkowicie dobrowolna i będzie ignorowana w czasie testowania, powinna mieć niewielki rozmiar).
+Tabela `data` zawiera krotki wynikowe. Każda krotka to obiekt zawierający wartości wszystkich podanych w specyfikacji atrybutów.
+
+Dopuszczalne jest dodatkowe pole o kluczu `debug` i wartości typu `string` z ew. informacją przydatną w debugowaniu (jest ona całkowicie dobrowolna i będzie ignorowana w czasie testowania, powinna mieć niewielki rozmiar).
 
 
 ## Przykładowe wejście i wyjście
@@ -147,10 +145,19 @@ Pierwsze uruchomienie (z parametrem `--init`):
 ###### Kolejne uruchomienie:
 ```
 { "function": "open", "body": { "database": "student", "login": "app", "password": "qwerty"}}
+{ "function": "closest_nodes", "body": { "ilat": 51.107883, "ilon": 17.038538}}
 { "function": "node", "body": { "node": 12345, "lat": 51.111044, "lon": 17.053423, "description": "a nice place to relax, strongly recommended"}}
 { "function": "node", "body": { "node": 12346, "lat": 51.198127, "lon": 16.919484, "description": "another nice place, is a must-see"}}
 { "function": "catalog", "body": { "version": 1, "nodes": [12345, 12345, 12346, 12345]}}
-{ "function": "catalog", "body": { "version": 2, "nodes": [12345, 12346]}}
+{ "function": "catalog", "body": { "version": 2, "nodes": [12346, 12345, 12346]}}
+{ "function": "trip", "body": { "cyclist": "piotrek", "date": "2020-06-16", "version": 1}}
+{ "function": "trip", "body": { "cyclist": "paweł", "date": "2020-06-16", "version": 1}}
+{ "function": "trip", "body": { "cyclist": "janek", "date": "2020-06-15", "version": 2}}
+{ "function": "closest_nodes", "body": { "ilat": 51.107883, "ilon": 17.038538}}
+{ "function": "party", "body": { "icyclist": "piotrek", "date": "2020-06-17"}}
+{ "function": "guests", "body": { "node": 12345, "date": "2020-06-16"}}
+{ "function": "cyclists", "body": { "limit": 2}}
+
 
 
 
@@ -159,11 +166,30 @@ Pierwsze uruchomienie (z parametrem `--init`):
 ###### Oczekiwane wyjście (dla czytelności zawiera znaki nowej linii)
 ```
 {"status": "OK"}
+{"status": "OK", "data": []}
 {"status": "OK"}
 {"status": "OK"}
-```
+{"status": "OK"}
+{"status": "OK"}
+{"status": "OK"}
+{"status": "OK"}
+{"status": "OK"}
+{"status": "OK", "data": [
+{"node": 12346, "olat": 51.111044, "olon": 17.053423, "distance": 1681},
+{"node": 12345, "olat": 51.198127, "olon": 16.919484, "distance": 16308}
+]}
+{"status": "OK", "data": [
+  {"ocyclist": "paweł", "node": 12346, "distance": 0}
+]}
+{"status": "OK", "data": [
+  {"cyclist": "paweł"},
+  {"cyclist": "piotrek"}
+]}
+{"status": "OK", "data": [
+  {"cyclist": "paweł", "no_trips": 1, "distance": 34970,
+  {"cyclist": "piotrek", "no_trips": 1, "distance": 34970}
+]}
 
-(przykład zostanie rozbudowany o przykłady użycia pozostałych funkcji)
 
 ## Format opisu API
 
@@ -233,10 +259,10 @@ Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcj
 ###### trip
 
 ```
-trip <trip> <cyclist> <date> <version> 
+trip <cyclist> <date> <version> 
 ```
 
-Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<cyclist>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, 
+Rezerwacja nowej wycieczki dla klienta `<cyclist>`, `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, `<version>` to numer wycieczki z katalogu, 
 
 `<cyclist>` może być nowym klientem lub jednym z dotychczasowych klientów.
 
@@ -269,7 +295,7 @@ closest_nodes <ilat> <ilon>
 ```
 
 Znajdź i zwróć dane 3 punktów położonych najbliżej współrzędnych `<ilat> <ilon>` - dla każdego z tych 3 punktów zwróć identyfikator `<node>`, jego współprzędne `<olat>`, `<olon>` oraz odległość `<distance>`.
-W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystkie te punkty.
+W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystkie te punkty. Wynik posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<node>`.
 
 ```
 // <node> <olat> <olon> <distance>
@@ -281,8 +307,9 @@ W przypadku gdy liczba punktów w bazie jest mniejsza niż 3 to zwróć wszystki
 party <icyclist> <date>
 ```
 
-Znajdź i zwróć listę rowerzystów nocujących w promieniu **20 km** od miejsca nocowania klienta `<icyclist>` w dniu `<date>`. Jeśli `<icyclist>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
+Znajdź i zwróć listę rowerzystów (różnych od `<icyclist>`) nocujących w promieniu **20 km** od miejsca nocowania klienta `<icyclist>` w dniu `<date>`. Jeśli `<icyclist>` nie bierze w dniu `<date>` udziału w wycieczce to zwróć pusty wynik.
 Dla każdego rowerzysty podaj jego id `<ocyclist>`, id `<node>` punktu, w którym nocuje oraz odległość `<distance>` pomiędzy tym punktem, a miejscem nocowania rowerzysty `<icyclist>`. 
+Wyniki posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<ocyclist>`.
 
 ```
 // <ocyclist> <node> <distance>
@@ -294,22 +321,22 @@ guests <node> <date>
 ```
 
 Dla punktu `<node>` zwróć listę rowerzystów `<cyclist>`, którzy bedą w nim nocować w dniu `<date>`. Załóż, że `<node>` jest w bazie.
-
+Wyniki posortuj rosnąco wg `<cyclist>`.
 
 ```
 // <cyclist>
 
 ```
 
-##### cyclist
+##### cyclists
 ```
-cyclist <limit>
+cyclists <limit>
 ```
 
 Zwróć ranking rowerzystów - wynik ogranicz do pierwszych `<limit>` krotek.
 Dla każdego rowerzysty `<cyclist>` zwróć ile do tej pory zarezerwowa wycieczek `<no_trips>` oraz ile (co najmniej) kilometrów obejmowały łącznie te wycieczki `<distance>`
 (zsumuj odległości po linii prostej pomiędzy etapami, nie przejmuj się ew. błędem gdy jakiś punkt na trasie powtarza się). 
-Wyniki posortuj malejąco wg `<distance>`.
+Wyniki posortuj malejąco wg `<distance>`, w drugiej kolejności rosnąco wg `<cyclist>`.
 
 ```
 // <cyclist> <no_trips> <distance>
