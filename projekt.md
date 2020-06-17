@@ -68,7 +68,7 @@ Uwaga:
 
 Punktacja:
 - Przygotowanie modelu konceptualnego: **do 20 pkt.** 
-- Implementacja funkcji `open`, `node`, `catalog`, `trip`: **10 pkt.** (muszą być zaimplementowane).
+- Implementacja funkcji `node`, `catalog`, `trip`: **10 pkt.** (muszą być zaimplementowane).
 - Implementacja funkcji `closest_nodes`, `party`, `guests`, `cyclists` : **do 40 pkt. (po 10 pkt)**
 
 Punkty można dostać wyłącznie za funkcje, które można przetestować (tzn. aby otrzymać punkty za funkcję `closest_points` funkcja `node` też musi być zaimplementowana).
@@ -102,7 +102,7 @@ Wejście zawiera wywołania kolejnych funkcji API.
 - Baza nie będzie modyfikowana pomiędzy kolejnymi uruchomieniami.
 - Program nie będzie miał praw do tworzenia i zapisywania jakichkolwiek plików. 
 - Program będzie mógł czytać pliki z bieżącego katalogu (np. dołączony do rozwiązania studenta plik .sql zawierający polecenia tworzące niezbędne elementy bazy).
-- Wszystkie odległości wypisz po zaookrągleniu do pełnego metra.
+- Wszystkie odległości wypisz po zaookrągleniu do pełnego metra (funkcja `round`).
 
 ## Format wejścia
 
