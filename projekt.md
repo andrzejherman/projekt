@@ -264,23 +264,6 @@ Atrybuty zwracanej krotek
 // nie zwraca krotek
 ```
 
-<!--
-###### trip
-
-```
-trip <trip> <cyclist> <date> <nodes>
-```
-
-Rezerwacja nowej wycieczki o id `<trip>` dla klienta `<cyclist>`,  `<date>` to data dnia, w której wycieczka się rozpoczyna w pierwszym punkcie trasy, każdy kolejny punkt na trasie to kolejny dzień wycieczki, 
-`<nodes>` to tablica zawierająca identyfikatory kolejnych punktów na trasie wycieczki (tj. identyfikatory `<node>`). Załóż, że wszystkie te punkty zostały wcześniej dodane wywołaniami funkcji `node`.
-
-`<cyclist>` może być nowym klientem lub jednym z dotychczasowych klientów.
-
-Atrybuty zwracanej krotek
-```
-// nie zwraca krotek
-```
--->
 ###### closest_nodes
 
 ```
