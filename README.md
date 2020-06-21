@@ -32,5 +32,5 @@ Aby uzyskać ocenę projektu należy się umówić na rozmowę z prowadzącym ć
 - MPY: **(niebawem)**
 - PGA: **(niebawem)**
 - PLG: **(niebawem)**
-- PWI: **(niebawem)**
+- PWI: https://skos.ii.uni.wroc.pl/mod/choice/view.php?id=17142 (aby oddawać projekt rezerwujemy dwa sąsiednie sloty!)
 - RFE: **(niebawem)**
