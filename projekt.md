@@ -164,8 +164,8 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
 {"status": "OK"}
 {"status": "OK"}
 {"status": "OK", "data": [
-  {"node": 12346, "olat": 51.111044, "olon": 17.053423, "distance": 1681},
-  {"node": 12345, "olat": 51.198127, "olon": 16.919484, "distance": 16308}
+  {"node": 12345, "olat": 51.111044, "olon": 17.053423, "distance": 1681},
+  {"node": 12346, "olat": 51.198127, "olon": 16.919484, "distance": 16308}
 ]}
 {"status": "OK", "data": [
   {"ocyclist": "paweł", "node": 12346, "distance": 0}
@@ -175,8 +175,8 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
   {"cyclist": "piotrek"}
 ]}
 {"status": "OK", "data": [
-  {"cyclist": "paweł", "no_trips": 1, "distance": 34970,
-  {"cyclist": "piotrek", "no_trips": 1, "distance": 34970}
+  {"cyclist": "janek", "no_trips": 1, "distance": 34970,
+  {"cyclist": "paweł", "no_trips": 1, "distance": 34970}
 ]}
 ```
 
