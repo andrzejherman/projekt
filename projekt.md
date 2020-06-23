@@ -7,6 +7,12 @@ Ze względu na to, że interesuje nas przede wszystkim tematyka baz danych kolej
 ## Uwaga
 W przykładach była zamieniona długość i szerokość geograficzną, błąd poprawiłem ale efektem poprawki jest zmiana odległości w oczekiwanym wyjściu w przykładzie.
 
+## Pytania i odpowiedzi
+     
+> Powiedzmy, że pewien rowerzysta pokonuje trasę [1, 2, 3] zaczynając dnia 23-06-2020. Rozumiem, że oznacza to że nocuje 23-06-2020 w punkcie nr 2 (wnioskując po testach przykładowych). 
+
+Tak,  i to jest jego jedyny nocleg - nie wnikamy co robi przed rozpoczęciem wycieczki i po zakończeniu.
+
 ## Opis systemu
 
 Napisz system ułatwiający prowadzenie firmy organizującej wycieczki rowerowe. Firma obsługuje wiele punktów, w których zaczynają się i kończą etapy poszczególnych wycieczek.
