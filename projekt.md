@@ -4,6 +4,9 @@ Twoim zadaniem jest zaimplementowanie zdefiniowanego poniżej API.
 
 Ze względu na to, że interesuje nas przede wszystkim tematyka baz danych kolejne wywołania funkcji API należy wczytywać ze standardowego wejścia, a wyniki zapisywać na standardowe wyjście.
 
+## Uwaga
+W przykładach była zamieniona długość i szerokość geograficzną, błąd poprawiłem ale efektem poprawki jest zmiana odległości w oczekiwanym wyjściu w przykładzie.
+
 ## Opis systemu
 
 Napisz system ułatwiający prowadzenie firmy organizującej wycieczki rowerowe. Firma obsługuje wiele punktów, w których zaczynają się i kończą etapy poszczególnych wycieczek.
@@ -44,18 +47,23 @@ piotrek=# create table tab (name text, geog geography);
 
 piotrek=# create index on tab using Gist (geog);
 
-piotrek=# insert into tab  values ('wroclaw', 'SRID=4326;POINT(51.107883 17.038538)');
+piotrek=# insert into tab  values ('wroclaw', 'SRID=4326;POINT(17.038538 51.107883)');
+piotrek=# insert into tab  values ('opole', 'SRID=4326;POINT(17.926126 50.671062)');
+
 
 piotrek=# select name, ST_AsText(geog) from tab limit 5;             
   name   |         st_astext          
 ---------+----------------------------
- opole   | POINT(51.107883 17.038538)
- wrocław | POINT(50.671062 17.926126)
+ wrocław | POINT(17.038538 51.107883)
+ opole   | POINT(17.926126 50.671062)
+ 
 
-piotrek=#   SELECT name FROM tab WHERE ST_DWithin(geog, ST_GeographyFromText('SRID=4326;POINT(51.107883 17.038538)'), 1000);
- name  
--------
+piotrek=# SELECT name FROM tab WHERE ST_DWithin(geog, ST_GeographyFromText('SRID=4326;POINT(17.038538 51.107883)'), 80000);
+  name   
+---------
+ wroclaw
  opole
+
 
 ```
 
@@ -164,8 +172,8 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
 {"status": "OK"}
 {"status": "OK"}
 {"status": "OK", "data": [
-  {"node": 12345, "olat": 51.111044, "olon": 17.053423, "distance": 1681},
-  {"node": 12346, "olat": 51.198127, "olon": 16.919484, "distance": 16308}
+  {"node": 12345, "olat": 51.111044, "olon": 17.053423, "distance": 1100},
+  {"node": 12346, "olat": 51.198127, "olon": 16.919484, "distance": 13045}
 ]}
 {"status": "OK", "data": [
   {"ocyclist": "paweł", "node": 12346, "distance": 0}
@@ -175,8 +183,8 @@ Pierwsze uruchomienie (z parametrem `--init`): wejście puste (pusty plik).
   {"cyclist": "piotrek"}
 ]}
 {"status": "OK", "data": [
-  {"cyclist": "janek", "no_trips": 1, "distance": 34970,
-  {"cyclist": "paweł", "no_trips": 1, "distance": 34970}
+  {"cyclist": "janek", "no_trips": 1, "distance": 26957,
+  {"cyclist": "paweł", "no_trips": 1, "distance": 26957}
 ]}
 ```
 
