@@ -29,8 +29,8 @@ Oddajemy archiwum zawierające wszystkie pliki źródłowe programu, model konce
 
 Aby uzyskać ocenę projektu należy się umówić na rozmowę z prowadzącym ćwiczenia poprzez następujący formularz: 
 
-- MPY: **(niebawem)**
-- PGA: **(niebawem)**
-- PLG: **(niebawem)**
+- MPY: **(patrz skos/slack)**
+- PGA: **(patrz skos/slack)**
+- PLG: https://skos.ii.uni.wroc.pl/mod/choice/view.php?id=17180
 - PWI: https://skos.ii.uni.wroc.pl/mod/choice/view.php?id=17142 (aby oddawać projekt rezerwujemy dwa sąsiednie sloty!)
 - RFE: https://doodle.com/poll/rbaqyp25u982fbst
